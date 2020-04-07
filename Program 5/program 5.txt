@@ -1,0 +1,36 @@
+int a = 7;
+int b = 0;
+int c = 15;
+int D[];
+
+while(a != 0)
+{
+   b = b + c;
+   c = c + 1;
+   a = a - 1;
+}
+
+D[2] = b;
+
+
+$s0: a  $s1: b   $s2: c   $s3: base address of D
+
+addi , $s0 , $zero , 7
+
+addi , $s1,$zero , 0
+
+addi , $s2 , $zero , 15
+
+addi , $s3 , $zero , 52
+
+L2: beq $s0, $zero, L1
+
+add $s1, $s1, $s2
+
+addi $s2, $s2, 1
+
+addi $s0, $s0, -1
+
+J L2
+
+L1: sw $s1, 8($s3)

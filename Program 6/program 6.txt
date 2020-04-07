@@ -1,0 +1,45 @@
+int f1(int A, int B, int C)
+{
+	if(C == 0)
+		return A & B;
+	if(C == 1)
+		return A | B;
+	if(C == 2)
+	{
+	   int G = A | B;
+	   return G | G;
+	}
+
+	if(C == 3)
+		return A | 100;
+	if(C == 4)
+		return B & 412;
+}
+
+
+addi ,$t1, $zero, 1
+addi ,$t2, $zero, 2
+addi ,$t3, $zero, 3
+addi ,$t4, $zero, 4
+addi,$a0,$zero,5
+addi,$a1,$zero,7
+addi,$a2,$zero,1
+jal ,f1
+j,exit
+f1:
+beq ,$a2, $t0, AND
+beq ,$a2, $t1, OR
+beq ,$a2, $t2, NOR
+beq ,$a2, $t3, ORi
+beq ,$a2, $t4, ANDi
+AND:and ,$v0, $a0, $a1
+jr ,$ra
+OR: or ,$v0, $a0, $a1
+jr ,$ra
+NOR: nor, $v0, $a0, $a1
+jr, $ra
+ORi: ori ,$v0, $a0, 100
+jr ,$ra
+ANDi: andi ,$v0, $a1, 412
+jr ,$ra
+exit: add,$zero,$zero,$zero

@@ -1,0 +1,90 @@
+void swap(int v[], int k)
+{
+   int temp = v[k];
+   v[k] = v[k+1];
+   v[k+1] = temp;
+}
+
+v in $a0, k in $a1, temp in $t0
+
+
+void sort (int v[], int n)
+{ 
+   int i, j; 
+   for (i=0 ; i<n ; i++) 
+  {   
+     for (j=i–1 ; j>=0 && v[j]>v[j+1] ; j--) 
+     {
+        swap(v,j);
+     }
+   }
+}
+
+v in $a0, n in $a1, i in $s0, j in $s1
+
+
+
+addi , $a0 , $zero , 100
+addi , $a1 , $zero , 10
+addi , $t9 , $zero , 1
+jal , sort
+j , exit
+
+swap: 
+sll , $t1 , $a1 , 2
+add , $t1 , $a0 , $t1
+lw , $t0 , 0($t1)
+lw , $t2 , 4($t1)
+sw , $t2 , 0($t1)
+sw , $t0 , 4($t1)
+jr , $ra
+
+
+sort: 
+addi , $sp ,$sp , -20
+sw , $ra , 16($sp)
+sw , $s3 , 12($sp)
+sw , $s2 , 8($sp)
+sw , $s1 , 4($sp)
+sw , $s0 , 0($sp)
+
+
+add ,$s2 , $zero ,$a0 
+add ,$s3 , $zero , $a1 
+add ,$s0 , $zero ,$zero
+
+for1tst:
+slt, $t0 , $s0 , $s3 
+beq , $t0 , $zero , exit1 
+addi , $s1 , $s0 , -1 
+
+for2tst:
+slt , $t0 , $s1 , $zero
+beq , $t0 , $t9 , exit2 
+sll , $t1 , $s1 , 2 
+add , $t2 , $s2 , $t1
+lw , $t3 , 0($t2)
+lw , $t4 , 4($t2)
+slt ,$t0 , $t4 , $t3
+beq ,$t0 , $zero , exit2
+add ,$a0 , $zero , $s2
+add ,$a1 , $zero , $s1
+jal ,swap
+addi ,$s1 , $s1 , -1
+j ,for2tst
+
+exit2: 
+addi , $s0 , $s0,1
+j , for1tst
+
+
+exit1:
+lw , $s0 , 0($sp)
+lw , $s1 , 4($sp)
+lw , $s2 , 8($sp)
+lw , $s3 , 12($sp)
+lw , $ra , 16($sp)
+addi ,$sp , $sp , 20
+jr , $ra
+
+exit: add , $zero , $zero , $zero

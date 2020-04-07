@@ -1,0 +1,26 @@
+addi , $t1 , $zero , 0
+n
+y
+addi , $t2 , $zero , 10
+n
+y
+slt , $t3 , $t0 , $t2
+y
+L1
+y
+beq , $t3 , $zero , end
+n
+y
+add , $t1 , $t1 , $t0
+n
+y
+addi , $t0 , $t0 , 1
+n
+y
+j, L1
+n
+y
+add , $v0 , $t1 , $zero
+y
+end
+n

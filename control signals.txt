@@ -1,0 +1,33 @@
+	RegDst Jump  Branch JumpRegister MemRead MemtoReg ALUOp MemWrite ALUSrc RegWrite
+
+R-Form    1      0      0        0          0       0       2       0      0        1
+
+
+lw        0      0      0        0          1       1       0       0      1        1
+
+
+sw        -1     0      0        0          0      -1       0       1      1        0
+
+
+beq       -1     0      1        0          0      -1       1       0      0        0
+
+
+addi       0      0      0        0          0       0      3       0      1        1
+
+
+andi       0      0      0        0         0        0      4       0      1        1
+
+
+ori        0       0      0        0         0        0     5        0      1        1
+
+
+jr         -1     0       0        1         0       -1     -1      0      -1       0
+
+
+j          -1     1       0        0         0       -1     -1      0      -1       0
+
+
+jal        2      1       0        0        0         2     -1      0      -1       1 
+
+
+      

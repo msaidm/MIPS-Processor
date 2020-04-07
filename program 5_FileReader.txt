@@ -1,0 +1,32 @@
+addi , $s0 , $zero , 7
+n
+y
+addi , $s1,$zero , 0
+n
+y
+addi , $s2 , $zero , 15
+n
+y
+addi , $s3 , $zero , 52
+n
+y
+beq $s0, $zero, L1
+y
+L2
+y
+add $s1, $s1, $s2
+n
+y
+addi $s2, $s2, 1
+n
+y
+addi $s0, $s0, -1
+n
+y
+J L2
+n
+y
+sw $s1, 8($s3)
+y
+L1
+n
